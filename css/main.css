@@ -1,18 +1,42 @@
 *::-webkit-input-placeholder {
 	color: #666;
 	opacity: 1;
+	font-style: italic;
 }
 *:-moz-placeholder {
 	color: #666;
 	opacity: 1;
+	font-style: italic;
 }
 *::-moz-placeholder {
 	color: #666;
 	opacity: 1;
+	font-style: italic;
 }
 *:-ms-input-placeholder {
 	color: #666;
 	opacity: 1;
+	font-style: italic;
+}
+
+#page-preloader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff;
+	z-index: 100500;
+}
+
+#page-preloader .spinner {
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	background: url('/img/system/spinner.gif') no-repeat 50% 50%;
+	margin: -16px 0 0 -16px;
 }
 
 body input:focus:required:invalid,
@@ -24,6 +48,147 @@ body textarea:required:valid {
 	
 }
 body {
-	font-family: "RobotoRegular", sans-serif;
+	font-size: 14px;
+	font-family: "Roboto", sans-serif;
+}
+
+header {
+	background-color: #f2b102;
+	padding: 10px;
+	color: #ffffff;
+}
+
+label {
+	float: left;
+}
+
+.logo {
+	float: left;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.logo a {
+	color: #845c00;
+	text-decoration: none;
+	font-family: "Dancing Script", cursive;
+	font-size: 26px;
+}
+
+.logo-text {
+	font-family: "Dancing Script", cursive;
+	font-size: 26px;
+}
+
+.login-button-container {
+	margin-top: 7px;
+	float: right;
+	display: inline-block;
+	vertical-align: middle;
 	font-size: 16px;
+}
+
+.login-button-container a, .logo a {
+	color: #4f4f4f;
+	text-decoration: none;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+}
+
+.login-button-container a:hover, .logo a:hover {
+	color: #fff;
+}
+
+.sign-in-button, .sign-up-button {
+	color: #fff !important;
+	font-size: 14px;
+}
+
+.sign-in-button:hover, .sign-up-button:hover {
+	color: #845c00 !important;
+	margin: 0;
+}
+
+.fancybox-title {
+	display: none;
+}
+
+.login-form input, .main-right input {
+	font-size: 12px;
+	padding: auto 5px;
+	margin-bottom: 5px;
+}
+
+.login-form hr {
+	margin-bottom: 25px;
+	color: #444;
+}
+
+.login-text {
+	color: #9b6f00;
+	font-size: 14px;
+}
+
+.modal-footer {
+	text-align: center;
+}
+
+.modal-header {
+	text-align: center;
+}
+
+.login-form label {
+	font-size: 12px;
+}
+
+.response-field {
+	opacity: 0;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+	transition: all .3s;
+	color: red;
+	font-style: italic;
+	font-size: 14px;
+}
+
+.main {
+	background-color: #f4f4f4;
+	padding: 100px 15px 15px 15px;
+}
+
+.main-left {
+	float: left;
+}
+
+.main-left h3 {
+	color: #565656;
+	font-family: "Roboto", sans-serif;
+}
+
+.main-left h1 {
+	font-family: "Raleway", sans-serif;
+}
+
+.main-right {
+	float: right;
+	text-align: left;
+}
+
+.modal-link {
+	float: right !important;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.modal-link:hover {
+	text-decoration: none;
+}
+
+.main-sign-up-button {
+	width: 100%;
 }
