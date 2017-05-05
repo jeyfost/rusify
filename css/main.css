@@ -47,7 +47,7 @@ body input:required:valid,
 body textarea:required:valid {
 	
 }
-body {
+body, .text {
 	font-size: 14px;
 	font-family: "Roboto", sans-serif;
 }
@@ -60,6 +60,17 @@ header {
 
 label {
 	float: left;
+}
+
+footer {
+	width: 100%;
+	padding: 30px;
+	background-color: #384047;
+	color: #fff;
+}
+
+footer a, footer a:hover {
+	color: #fff;
 }
 
 .logo {
@@ -158,14 +169,14 @@ label {
 
 .main {
 	background-color: #f4f4f4;
-	padding: 100px 15px 15px 15px;
+	padding: 80px 15px 35px 15px;
 }
 
 .main-left {
 	float: left;
 }
 
-.main-left h3 {
+.main-left h3, .text-header h4 {
 	color: #565656;
 	font-family: "Roboto", sans-serif;
 }
@@ -191,4 +202,85 @@ label {
 
 .main-sign-up-button {
 	width: 100%;
+}
+
+.main-description-icon {
+	float: left;
+	width: 64px;
+	height: 64px;
+}
+
+.main-description-text {
+	float: left;
+	margin: 11px auto auto 20px;
+}
+
+.main-description {
+	width: 100%;
+	margin-top: 15px;
+}
+
+#icon2 {
+	margin: -60px auto auto 83px;
+}
+
+.text-header {
+	font-family: "Raleway", sans-serif;
+}
+
+.computer-icon {
+	float: left;
+	width: 128px;
+	padding-top: 5px;
+}
+
+.computer-text {
+	float: left;
+	margin: 10px auto auto 20px;
+}
+
+.guarantee-icon {
+	width: 100%;
+}
+
+.guarantee-text {
+	width: 100%;
+	padding-top: 20px;
+}
+
+.index-grey-container {
+	background-color: #f4f4f4;
+	margin-top: 60px;
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+
+.index-container {
+	margin-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+
+.feedback-container {
+	padding: 10px;
+	border: 1px solid #cccaab;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #eeedc9;
+	z-index: 3;
+}
+
+.feedback-img {
+	z-index: 4;
+	margin-top: -1px;
+	margin-left: 30px;
+}
+
+.feedback-photo {
+	margin-top: 10px;
+}
+
+.font-16 {
+	font-size: 16px;
 }

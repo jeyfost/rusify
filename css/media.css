@@ -2,7 +2,18 @@
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
+    .computer-text {
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+        padding-right: 60px;
+    }
 
+    .computer-icon {
+        width: 100%;
+        text-align: center;
+        margin: 10px auto;
+    }
 }
 
 /* Medium Devices, Desktops */
@@ -13,11 +24,33 @@
         width: 100%;
         text-align: center;
     }
+
+    .feedback-container {
+        margin-top: 30px;
+    }
+
+    .footer-section {
+        margin-top: 30px;
+        text-align: center;
+    }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
+    .main-description-text {
+        width: 100%;
+        text-align: center;
+        margin: 10px auto;
+    }
+    
+    .main-description-icon {
+        width: 100%;
+        text-align: center;
+    }
 
+    #icon2 {
+        margin: 10px auto;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -27,7 +60,9 @@
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width : 320px) {
-
+    .main-left {
+        text-align: center;
+    }
 }
 
 

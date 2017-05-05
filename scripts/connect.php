@@ -6,7 +6,7 @@
 	$mysqli = new mysqli($host, $user, $password, $db);
 
 	if(!$mysqli) {
-		printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error());
+		printf("Unable to connect to database. Error code: %s\n", mysqli_connect_error());
 	}
 	
 	$mysqli->query("SET NAMES 'utf8'");

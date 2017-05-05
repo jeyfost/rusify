@@ -68,4 +68,5 @@ $(document).ready(function () {
 function clearResponseField() {
 	$('.response-field').html('');
 	$('.response-field').css('opacity', '0');
+	$('body').css('padding-right', '0');
 }
