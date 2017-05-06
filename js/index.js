@@ -49,9 +49,16 @@ $(document).ready(function () {
 				success: function (response) {
 					switch(response) {
 						case "ok":
+							window.location.href = "/personal/registration-continue.php";
 							break;
 						case "failed":
 							$.notify("Something goes wrong. Please try again or contact us.", "error");
+							break;
+						case "email-format":
+							$.notify("Email format is wrong.", "error");
+							break;
+						case "email-duplicate":
+							$.notify("The email address you have entered already exists.", "error");
 							break;
 						default:
 							$.notify(response, "warn");

@@ -55,7 +55,9 @@
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
-
+    .form-400 {
+        width: 100%;
+    }
 }
 
 /* Custom, iPhone Retina */

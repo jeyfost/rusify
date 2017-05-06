@@ -1,11 +1,18 @@
 <?php
 	session_start();
 
-	if(isset($_SESSION['userID'])) {
-		header("Location: school/");
-	}
-
 	include("scripts/connect.php");
+
+	if(isset($_SESSION['userID'])) {
+		$activeCheckResult = $mysqli->query("SELECT active FROM users WHERE id = '" . $_SESSION['userID'] . "'");
+		$activeCheck = $activeCheckResult->fetch_array(MYSQLI_NUM);
+
+		if ($activeCheck[0] != 0) {
+			header("Location: ../school/");
+		} else {
+			header("Location: personal/registration-continue.php");
+		}
+	}
 
 	if(isset($_SESSION['userID'])) {
 		if(isset($_COOKIE['rusify_login']) and isset($_COOKIE['rusify_password'])) {
@@ -138,7 +145,7 @@
 						<a href="/">Rusify</a>
 					</div>
 					<div class="login-button-container">
-						<a href="" class="sign-in-button" data-toggle="modal" data-target="#sign-in"><i class='fa fa-sign-in' aria-hidden='true'></i> Sign in</a><span class="login-text">&nbsp;&nbsp;or&nbsp;&nbsp;</span><a href= "personal/sign-up.php" class="sign-up-button"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a>
+						<a href="" class="sign-in-button" data-toggle="modal" data-target="#sign-in"><i class='fa fa-sign-in' aria-hidden='true'></i> Sign in</a><span class="login-text">&nbsp;&nbsp;or&nbsp;&nbsp;</span><a href= "/personal/sign-up.php" class="sign-up-button"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a>
 					</div>
 				</div>
 			</div>

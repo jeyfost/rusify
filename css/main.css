@@ -181,7 +181,7 @@ footer a, footer a:hover {
 	font-family: "Roboto", sans-serif;
 }
 
-.main-left h1 {
+h1 {
 	font-family: "Raleway", sans-serif;
 }
 
@@ -283,4 +283,14 @@ footer a, footer a:hover {
 
 .font-16 {
 	font-size: 16px;
+}
+
+.form-400 {
+	width: 400px;
+	margin: 50px auto 10px auto;
+}
+
+.form-div {
+	float: left;
+	margin-left: 10px;
 }
