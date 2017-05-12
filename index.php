@@ -372,6 +372,7 @@
 					<hr />
 					<label style="font-size: 12px;">Remember your password?</label>
 					<a href="" data-toggle="modal" data-target="#sign-in" style="font-size: 12px; font-weight: bold; float: right;" onclick="clearResponseField()" data-dismiss="modal">Sign in</a>
+					<br />
 					<div class="response-field"></div>
 				</div>
 			</div>
@@ -395,10 +396,11 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success password-reset-button">Sign up</button>
+					<button type="button" class="btn btn-success modal-sign-up-button">Sign up</button>
 					<hr />
 					<label style="font-size: 12px;">Already have an account?</label>
 					<a href="" data-toggle="modal" data-target="#sign-in" style="font-size: 12px; font-weight: bold; float: right;" onclick="clearResponseField()" data-dismiss="modal">Sign in</a>
+					<br />
 					<div class="response-field"></div>
 				</div>
 			</div>
