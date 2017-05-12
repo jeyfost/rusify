@@ -4,7 +4,17 @@
 	include("../scripts/connect.php");
 
 	if(!isset($_SESSION['userID'])) {
-		header("Location: ../");
+		if(!empty($_REQUEST['hash'])) {
+			$userResult = $mysqli->query("SELECT active FROM users WHERE hash = '".$mysqli->real_escape_string($_REQUEST['hash'])."'");
+			$user = $userResult->fetch_assoc();
+
+			if($user['active'] != 0) {
+				$_SESSION['userID'] = $user['id'];
+				header("Location: ../school/");
+			}
+		} else {
+			header("Location: ../");
+		}
 	} else {
 		$activeCheckResult = $mysqli->query("SELECT active FROM users WHERE id = '".$_SESSION['userID']."'");
 		$activeCheck = $activeCheckResult->fetch_array(MYSQLI_NUM);
@@ -121,20 +131,20 @@
 			<div class="row">
 				<div class="container text-center">
 					<h1>Continue your registration by filling next fields</h1>
-					<form class="form-400">
-						<label for="loginInput">Username:</label>
+					<form class="form-400" id="continueRegistrationForm" method="post">
+						<label for="loginInput"><i class="fa fa-user" aria-hidden="true"></i> Username:</label>
 						<br />
 						<input type="text" class="form-control" placeholder="Username..." id="loginInput" name="login" required />
 						<br />
-						<label for="firstNameInput">First name:</label>
+						<label for="firstNameInput"><i class="fa fa-address-card" aria-hidden="true"></i> First name:</label>
 						<br />
 						<input type="text" class="form-control" placeholder="First name..." id="firstNameInput" name="firstName" required />
 						<br />
-						<label for="lastNameInput">Last name:</label>
+						<label for="lastNameInput"><i class="fa fa-address-card-o" aria-hidden="true"></i> Last name:</label>
 						<br />
 						<input type="text" class="form-control" placeholder="Last name..." id="lastNameInput" name="lastName" required />
 						<br />
-						<label>Select your birth date</label>
+						<label><i class="fa fa-birthday-cake" aria-hidden="true"></i> Select your birth date</label>
 						<br /><br />
 						<?php
 							$month = (int)date('m');
@@ -152,12 +162,12 @@
 							}
 						?>
 						<div class="form-div" style="margin: 0;">
-							<label for="dayInput">Day:</label>
+							<label for="yearInput">Year:</label>
 							<br />
-							<select class="form-control" id="dayInput" name="day">
+							<select class="form-control" id="yearInput" name="year">
 								<?php
-									for($i = 1; $i <= $maxDay; $i++) {
-										echo "<option value='".$i."'"; if((int)date('d') == $i) {echo "selected";} echo ">".$i."</option>";
+									for($i = 1900; $i <= date('Y'); $i++) {
+										echo "<option value='".$i."'"; if(date('Y') == $i) {echo "selected";} echo ">".$i."</option>";
 									}
 								?>
 							</select>
@@ -181,26 +191,53 @@
 							</select>
 						</div>
 						<div class="form-div">
-							<label for="yearInput">Year:</label>
+							<label for="dayInput">Day:</label>
 							<br />
-							<select class="form-control" id="yearInput" name="year">
+							<select class="form-control" id="dayInput" name="day">
 								<?php
-									for($i = 1900; $i <= date('Y'); $i++) {
-										echo "<option value='".$i."'"; if(date('Y') == $i) {echo "selected";} echo ">".$i."</option>";
+									for($i = 1; $i <= $maxDay; $i++) {
+										echo "<option value='".$i."'"; if((int)date('d') == $i) {echo "selected";} echo ">".$i."</option>";
 									}
 								?>
 							</select>
 						</div>
 						<div style="clear: both;"></div>
 						<br />
-						<label for="skypeInput">Skype:</label>
+						<?php
+							$isoResult = $mysqli->query("SELECT * FROM isocodes ORDER BY country LIMIT 1");
+							$iso = $isoResult->fetch_assoc();
+							$flag = $iso['code'].".png";
+						?>
+						<label for="countrySelect"><i class="fa fa-globe" aria-hidden="true"></i> <img src="/img/flags/flat/16/<?= $flag ?>" id="flag" title="<?= $iso['country'] ?>" alt="<?= $iso['code'] ?>" /> Select your location</label>
 						<br />
-						<input type="text" class="form-control" placeholder="Skype..." id="lastNameInput" name="lastName" required />
+						<select id="countrySelect" name="country" class="form-control">
+							<?php
+								$countryResult = $mysqli->query("SELECT * FROM isocodes ORDER BY country");
+								while($country = $countryResult->fetch_assoc()) {
+									echo "<option value='".$country['code']."'>".$country['country']."</option>";
+								}
+							?>
+						</select>
 						<br />
-						<label for="photoInput">Pick your photo:</label>
+						<label for="skypeInput"><i class="fa fa-skype" aria-hidden="true"></i> Skype:</label>
+						<br />
+						<input type="text" class="form-control" placeholder="Skype..." id="skypeInput" name="skype" required />
+						<br />
+						<label><i class="fa fa-question" aria-hidden="true"></i> Select your role</label>
+						<br />
+						<div class="radio">
+							<label><input type="radio" name="role" id="studentRadio" checked><i class="fa fa-graduation-cap" aria-hidden="true"></i> I'm  a student</label>
+						</div>
+						<br />
+						<div class="radio">
+							<label><input type="radio" name="role" id="teacherRadio"><i class="fa fa-universal-access" aria-hidden="true"></i> I'm  a teacher</label>
+						</div>
+						<br />
+						<br />
+						<label for="photoInput"><i class="fa fa-camera" aria-hidden="true"></i> Pick your photo:</label>
 						<input id="photoInput" name="photo" type="file" accept="image/*" class="file-loading" />
 						<br /><br />
-						<input type="button" value="Lets go!" id="registrationButton" class="btn btn-success" />
+						<input type="button" value="Lets go!" id="registrationButton" class="btn btn-success" userid="<?= $_SESSION['userID'] ?>" hash="<?= $mysqli->real_escape_string($_REQUEST['hash']) ?>" />
 					</form>
 				</div>
 			</div>

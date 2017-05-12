@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="rusify@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="rusify">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="aeroflot_summer_2016"/>
+    <schema id="4" parent="1" name="airlab"/>
+    <schema id="5" parent="1" name="argos"/>
+    <schema id="6" parent="1" name="argosfmb_database"/>
+    <schema id="7" parent="1" name="fp"/>
+    <schema id="8" parent="1" name="information_schema"/>
+    <schema id="9" parent="1" name="jeyfost"/>
+    <schema id="10" parent="1" name="library"/>
+    <schema id="11" parent="1" name="mysql"/>
+    <schema id="12" parent="1" name="osticket"/>
+    <schema id="13" parent="1" name="performance_schema"/>
+    <schema id="14" parent="1" name="praktik"/>
+    <schema id="15" parent="1" name="woo"/>
+    <schema id="16" parent="1" name="woo2"/>
+    <table id="17" parent="2" name="isocodes"/>
+    <table id="18" parent="2" name="users"/>
+    <column id="19" parent="17" name="code">
+      <Position>1</Position>
+      <DataType>varchar(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="17" name="country">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="21" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>code</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="22" parent="18" name="id">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="18" name="login">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="18" name="email">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="18" name="skype">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="26" parent="18" name="photo">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="27" parent="18" name="teacher">
+      <Position>7</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="28" parent="18" name="registered">
+      <Position>8</Position>
+      <DataType>varchar(19)|0</DataType>
+    </column>
+    <column id="29" parent="18" name="iso">
+      <Position>9</Position>
+      <DataType>varchar(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="18" name="first_name">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="18" name="last_name">
+      <Position>11</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="18" name="birth_date">
+      <Position>12</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="33" parent="18" name="last_visit">
+      <Position>13</Position>
+      <DataType>varchar(19)|0</DataType>
+    </column>
+    <column id="34" parent="18" name="password">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="18" name="visits">
+      <Position>14</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="36" parent="18" name="admin">
+      <Position>15</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="37" parent="18" name="moderator">
+      <Position>16</Position>
+      <DataType>tinyint(1) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="38" parent="18" name="hash">
+      <Position>17</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="39" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

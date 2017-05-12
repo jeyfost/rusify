@@ -373,7 +373,7 @@
 		</div>
 	</div>
 
-	<footer>
+	<footer id="footer-top">
 		<div class="row">
 			<div class="container">
 				<div class="col-md-4 footer-section">
@@ -433,7 +433,7 @@
 		</div>
 	</footer>
 
-	<footer style="background-color: #32393f;">
+	<footer style="background-color: #32393f;" id="footer-bottom">
 		<div class="row">
 			<div class="container">
 				<div class="col-md-4 footer-section">&copy; <?php if(date('Y') > 2017) {echo "2017 - ".date('Y');} else {

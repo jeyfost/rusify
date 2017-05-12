@@ -68,3 +68,21 @@ $(document).ready(function() {
 	});
 
 });
+
+$(document).load(function () {
+	var T = $('#footer-top');
+	var ftT = T.offset().top;
+	var ftH = T.height();
+
+	var B = $('#footer-bottom');
+	var fbT = B.offset().top;
+	var fbH = B.height();
+	var fb = parseInt(fbT + fbH);
+
+	var w = window.height();
+
+	if(fb < w) {
+		B.offset({top: parseInt(w - fbH)});
+		T.offset({top: parseInt(w - fbH - fbT)});
+	}
+});
