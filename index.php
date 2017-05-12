@@ -145,7 +145,7 @@
 						<a href="/">Rusify</a>
 					</div>
 					<div class="login-button-container">
-						<a href="" class="sign-in-button" data-toggle="modal" data-target="#sign-in"><i class='fa fa-sign-in' aria-hidden='true'></i> Sign in</a><span class="login-text">&nbsp;&nbsp;or&nbsp;&nbsp;</span><a href= "/personal/sign-up.php" class="sign-up-button"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a>
+						<a href="" class="sign-in-button" data-toggle="modal" data-target="#sign-in"><i class='fa fa-sign-in' aria-hidden='true'></i> Sign in</a><span class="login-text">&nbsp;&nbsp;or&nbsp;&nbsp;</span><a href= "" class="sign-up-button" data-toggle="modal" data-target="#sign-up"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a>
 					</div>
 				</div>
 			</div>
@@ -203,6 +203,8 @@
 							<input type="password" name="mainPassword" id="mainPasswordInput" placeholder="Password..." class="form-control" required />
 							<br />
 							<button type="button" class="btn btn-success main-sign-up-button">Sign up</button>
+							<br /><br />
+							<p class="text-center"><b><a href="" data-toggle="modal" data-target="#sign-in" style="font-size: 12px;">Already have an account?</a></b></p>
 						</form>
 					</div>
 				</div>
@@ -341,7 +343,7 @@
 					<button type="button" class="btn btn-success login-button">Sign in</button>
 					<hr />
 					<div style="width: 100%; text-align: center;">
-						<label style="font-size: 12px;">New to Rusify? </label><a href="/personal/sign-up.php" class="modal-link">Create an account.</a>
+						<label style="font-size: 12px;">New to Rusify? </label><a href="" class="modal-link" data-toggle="modal" data-target="#sign-up" data-dismiss="modal" onclick="clearResponseField()">Create an account</a>
 					</div>
 					<br />
 					<div class="response-field"></div>
@@ -367,6 +369,36 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success password-reset-button">Reset my password</button>
+					<hr />
+					<label style="font-size: 12px;">Remember your password?</label>
+					<a href="" data-toggle="modal" data-target="#sign-in" style="font-size: 12px; font-weight: bold; float: right;" onclick="clearResponseField()" data-dismiss="modal">Sign in</a>
+					<div class="response-field"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="sign-up" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Sign up for free</h4>
+			    </div>
+				<div class="modal-body">
+					<form class="login-form">
+						<label for="modalEmailInput">Email</label>
+						<input type="text" name="modalEmail" id="modalEmailInput" placeholder="Email..." class="form-control" required />
+						<br />
+						<label for="modalPasswordInput">Password</label>
+						<input type="password" name="modalPassword" id="modalPasswordInput" placeholder="Password..." class="form-control" required />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success password-reset-button">Sign up</button>
+					<hr />
+					<label style="font-size: 12px;">Already have an account?</label>
+					<a href="" data-toggle="modal" data-target="#sign-in" style="font-size: 12px; font-weight: bold; float: right;" onclick="clearResponseField()" data-dismiss="modal">Sign in</a>
 					<div class="response-field"></div>
 				</div>
 			</div>

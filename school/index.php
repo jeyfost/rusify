@@ -134,7 +134,7 @@
 
 </head>
 
-<body <?php if(isset($_SESSION['registered'])) {echo "onload='registrationSuccessfulModal()'";} ?>>
+<body <?php if(isset($_SESSION['registered'])) {echo "onload='registrationSuccessfulModal()'"; unset($_SESSION['registered']);} ?>>
 
 	<div id="page-preloader"><span class="spinner"></span></div>
 
