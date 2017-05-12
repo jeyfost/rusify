@@ -7,7 +7,7 @@
 		$activeCheckResult = $mysqli->query("SELECT active FROM users WHERE id = '" . $_SESSION['userID'] . "'");
 		$activeCheck = $activeCheckResult->fetch_array(MYSQLI_NUM);
 
-		if ($activeCheck[0] != 0) {
+		if ($activeCheck[0] != ACCOUNT_INACTIVE) {
 			header("Location: ../school/");
 		} else {
 			header("Location: personal/registration-continue.php");
@@ -447,4 +447,5 @@
 	</footer>
 
 </body>
+
 </html>

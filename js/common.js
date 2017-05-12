@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	//Таймер обратного отсчета
 	//Документация: http://keith-wood.name/countdown.html
 	//<div class="countdown" date-time="2015-01-07"></div>
@@ -66,10 +65,9 @@ $(document).ready(function() {
 		}, 800);
 		return false;
 	});
-
 });
 
-$(document).load(function () {
+$(window).load(function () {
 	var T = $('#footer-top');
 	var ftT = T.offset().top;
 	var ftH = T.height();
@@ -79,7 +77,7 @@ $(document).load(function () {
 	var fbH = B.height();
 	var fb = parseInt(fbT + fbH);
 
-	var w = window.height();
+	var w = $(window).height();
 
 	if(fb < w) {
 		B.offset({top: parseInt(w - fbH)});

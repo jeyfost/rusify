@@ -97,7 +97,7 @@ $(document).on('ready', function() {
 						success: function (response) {
 							switch(response) {
 								case "ok":
-									window.location.href = "/personal/login.php";
+									window.location.href = "/school/";
 									break;
 								case "failed":
 									$.notify("An error has occurred. Please try again.", "error");

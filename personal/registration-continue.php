@@ -8,7 +8,7 @@
 			$userResult = $mysqli->query("SELECT active FROM users WHERE hash = '".$mysqli->real_escape_string($_REQUEST['hash'])."'");
 			$user = $userResult->fetch_assoc();
 
-			if($user['active'] != 0) {
+			if($user['active'] != ACCOUNT_INACTIVE) {
 				$_SESSION['userID'] = $user['id'];
 				header("Location: ../school/");
 			}
@@ -19,7 +19,7 @@
 		$activeCheckResult = $mysqli->query("SELECT active FROM users WHERE id = '".$_SESSION['userID']."'");
 		$activeCheck = $activeCheckResult->fetch_array(MYSQLI_NUM);
 
-		if($activeCheck[0] != 0 ) {
+		if($activeCheck[0] != ACCOUNT_INACTIVE ) {
 			header("Location: ../school/");
 		}
 	}
