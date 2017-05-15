@@ -198,7 +198,7 @@
 					<br /><br />
 					<img src="/img/flags/flat/16/US.png" /> <span class="font-16">USA</span>
 					<br />
-					167 Corey Rd., Suite 206, Brighton, MA 02135
+					<?= COMPANY_ADDRESS ?>
 				</div>
 				<div class="col-md-4 footer-section">
 					<span class="font-16">Rusify social</span>

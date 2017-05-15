@@ -168,6 +168,10 @@ footer a, footer a:hover {
 	font-weight: bold;
 }
 
+.grey {
+	background-color: #f4f4f4;
+}
+
 .main {
 	background-color: #f4f4f4;
 	padding: 80px 15px 35px 15px;
@@ -294,4 +298,12 @@ h1 {
 .form-div {
 	float: left;
 	margin-left: 10px;
+}
+
+.transition {
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+	-o-transition: all .3s;
+	transition: all .3s;
 }

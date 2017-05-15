@@ -17,6 +17,7 @@ $(document).ready(function () {
 				success: function (response) {
 					switch(response) {
 						case "ok":
+							window.location.href = "/school/";
 							break;
 						case "failed":
 							if(responseField.css('opacity') === "0") {
@@ -167,6 +168,80 @@ $(document).ready(function () {
 				responseField.css('opacity', '0');
 				setTimeout(function () {
 					responseField.html('<hr />Please fill in your email and password.');
+					responseField.css('opacity', '1');
+				}, 300);
+			}
+		}
+	});
+
+	$('.password-reset-button').click(function() {
+		var email = $('#emailInput').val();
+
+		if(email !== '') {
+			$.ajax({
+				type: "POST",
+				data: {"email": email},
+				url: "/scripts/common/ajaxValidateEmail.php",
+				success: function (validity) {
+					if(validity === "valid") {
+						$.ajax({
+							type: "POST",
+							data: {"email": email},
+							url: "/scripts/personal/ajaxResetPassword.php",
+							success: function(response) {
+								switch(response) {
+									case "ok":
+										$('#emailInput').val('');
+										responseField.css("color", "#4cb541");
+
+										if(responseField.css('opacity') === "0") {
+											responseField.html('<hr />Success! Check your email for further instructions.');
+											responseField.css('opacity', '1');
+										} else {
+											responseField.css('opacity', '0');
+											setTimeout(function () {
+												responseField.html('<hr />Success! Check your email for further instructions.');
+												responseField.css('opacity', '1');
+											}, 300);
+										}
+										break;
+									case "email":
+										$.notify("This email doesn't exist.", "error");
+										break;
+									default:
+										$.notify(response, "warn");
+										break;
+								}
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+								$.notify(textStatus + "; " + errorThrown, "error");
+							}
+						});
+					} else {
+						if(responseField.css('opacity') === "0") {
+							responseField.html('<hr />Email format is incorrect.');
+							responseField.css('opacity', '1');
+						} else {
+							responseField.css('opacity', '0');
+							setTimeout(function () {
+								responseField.html('<hr />Email format is incorrect.');
+								responseField.css('opacity', '1');
+							}, 300);
+						}
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$.notify(textStatus + "; " + errorThrown, "error");
+				}
+			});
+		} else {
+			if(responseField.css('opacity') === "0") {
+				responseField.html('<hr />Please type your email.');
+				responseField.css('opacity', '1');
+			} else {
+				responseField.css('opacity', '0');
+				setTimeout(function () {
+					responseField.html('<hr />Please type your email.');
 					responseField.css('opacity', '1');
 				}, 300);
 			}

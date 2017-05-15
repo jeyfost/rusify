@@ -106,7 +106,10 @@ $(document).on('ready', function() {
 									$.notify("Your photo has an incorrect extension.", "error");
 									break;
 								case "login":
-									$.notify("Your login is already exists.", "error");
+									$.notify("Your username is already exists.", "error");
+									break;
+								case "login_length":
+									$.notify("Username must contain at least 3 symbols.", "error");
 									break;
 								default:
 									$.notify(response, "warn");

@@ -81,6 +81,6 @@ $(window).load(function () {
 
 	if(fb < w) {
 		B.offset({top: parseInt(w - fbH)});
-		T.offset({top: parseInt(w - fbH - fbT)});
+		T.offset({top: parseInt($('#footer-bottom').offset().top - ftH - 60)});
 	}
 });

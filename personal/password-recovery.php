@@ -1,53 +1,30 @@
 <?php
-	session_start();
+/**
+ * Created by PhpStorm.
+ * User: jeyfost
+ * Date: 15.05.2017
+ * Time: 11:36
+ */
 
-	include("scripts/connect.php");
+session_start();
 
-	if(isset($_SESSION['userID'])) {
-		$activeCheckResult = $mysqli->query("SELECT active FROM users WHERE id = '" . $_SESSION['userID'] . "'");
-		$activeCheck = $activeCheckResult->fetch_array(MYSQLI_NUM);
+include("../scripts/connect.php");
 
-		if ($activeCheck[0] != ACCOUNT_INACTIVE) {
-			header("Location: ../school/");
-		} else {
-			header("Location: personal/registration-continue.php");
-		}
+if(isset($_SESSION['userID'])) {
+	header("Location: ../school/");
+}
+
+if(empty($_REQUEST['hash'])) {
+	header("Location: ../");
+} else {
+	$hashCheckResult = $mysqli->query("SELECT COUNT(id) FROM users WHERE hash = '".$mysqli->real_escape_string($_REQUEST['hash'])."'");
+	$hashCheck = $hashCheckResult->fetch_array(MYSQLI_NUM);
+
+	if($hashCheck[0] == 0) {
+		header("Location: ../");
 	}
+}
 
-	if(isset($_SESSION['userID'])) {
-		if(isset($_COOKIE['rusify_login']) and isset($_COOKIE['rusify_password'])) {
-			setcookie("rusify_login", "", 0, '/');
-			setcookie("rusify_password", "", 0, '/');
-			setcookie("rusify_login", $_COOKIE['rusify_login'], time() + 60 * 60 * 24 * 30 * 12, '/');
-			setcookie("rusify_password", $_COOKIE['rusify_password'], time() + 60 * 60 * 24 * 30 * 12, '/');
-		}
-		else {
-			$userResult = $mysqli->query("SELECT * FROM users WHERE id = '".$_SESSION['userID']."'");
-			$user = $userResult->fetch_assoc();
-			setcookie("rusify_login", $user['login'], time() + 60 * 60 * 24 * 30 * 12, '/');
-			setcookie("rusify_password", $user['password'], time() + 60 * 60 * 24 * 30 * 12, '/');
-		}
-	} else {
-		if(isset($_COOKIE['rusify_login']) and isset($_COOKIE['rusify_password']) and !empty($_COOKIE['rusify_login']) and !empty($_COOKIE['rusify_password'])) {
-			$userResult = $mysqli->query("SELECT * FROM users WHERE login = '".$_COOKIE['rusify_login']."'");
-			$user = $userResult->fetch_assoc();
-
-			if(!empty($user) and $user['password'] == $_COOKIE['rusify_password']) {
-				$_SESSION['userID'] = $user['id'];
-			} else {
-				setcookie("rusify_login", "", 0, '/');
-				setcookie("rusify_password", "", 0, '/');
-			}
-		}
-	}
-
-	if(isset($_SESSION['userID'])) {
-		$visitsResult = $mysqli->query("SELECT visits FROM users WHERE id = '".$_SESSION['userID']."'");
-		$visits = $visitsResult->fetch_array(MYSQLI_NUM);
-		$count = $visits[0] + 1;
-
-		$mysqli->query("UPDATE users SET last_visit = '".date('d-m-Y H:i:s')."', visits = '".$count."' WHERE id = '".$_SESSION['userID']."'");
-	}
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +40,7 @@
 
 <head>
 
-	<title>Rusify</title>
+	<title>Password recovery</title>
 
 	<meta charset="utf-8" />
 	<meta name="description" content="" />
@@ -97,6 +74,7 @@
 	<link rel="stylesheet" href="/libs/owl-carousel/owl.carousel.css" />
 	<link rel="stylesheet" href="/libs/countdown/jquery.countdown.css" />
 	<link rel="stylesheet" href="/libs/unicorn-ui/unicorn-ui.css" />
+	<link rel="stylesheet" href="/libs/kartik/css/fileinput.css" />
 
 	<link rel="stylesheet" href="/css/fonts.css" />
 	<link rel="stylesheet" href="/css/main.css" />
@@ -124,16 +102,18 @@
 	<script src="/libs/landing-nav/navigation.js"></script>
 	<script src="/libs/notify.js/notify.js"></script>
 	<script src="/libs/preloader/preloader.js"></script>
+	<script src="/libs/kartik/js/fileinput.js"></script>
 
 	<script src="/js/common.js"></script>
 	<script src="/js/index.js"></script>
+	<script src="/js/personal/recovery.js"></script>
 
 	<!-- Yandex.Metrika counter --><!-- /Yandex.Metrika counter -->
 	<!-- Google Analytics counter --><!-- /Google Analytics counter -->
 
 </head>
 
-<body>
+<body class="grey">
 
 	<div id="page-preloader"><span class="spinner"></span></div>
 
@@ -153,173 +133,26 @@
 	</header>
 
 	<section class="main">
-		<div class="container">
+		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-8">
-					<div class="main-left">
-						<h1>Learn Russian with live teachers.</h1>
-						<h3>Rusify is an effective way to learn Russian. Find your own teacher and start your study!</h3>
-						<br /><br />
-						<div class="main-description">
-							<div class="main-description-icon" id="icon1">
-								<img src="/img/system/profile.png" />
+				<div class="container text-center">
+					<br /><br /><br />
+					<h1>Type your new password below</h1>
+					<form class="form-400 transition" id="continueRegistrationForm" method="post">
+						<div class="row">
+							<div class="col-md-8">
+								<input type="password" id="passwordInput" class="form-control" name="password" placeholder="New password..." />
 							</div>
-							<div class="main-description-text">
-								<b>Personal</b>
-								<br />
-								Our teachers adjust to your goals and level of knowledge in striving for rusifying you.
+							<div class="col-md-4">
+								<input type="button" class="btn btn-success btn-password-recovery" value="Set new password" hash="<?= $mysqli->real_escape_string($_REQUEST['hash']) ?>" />
 							</div>
 						</div>
-						<div style="clear: both;"></div>
-						<div class="main-description">
-							<div class="main-description-icon">
-								<img src="/img/system/trend.png" />
-							</div>
-							<div class="main-description-text" id="icon2">
-								<b>Effective</b>
-								<br />
-								With Rusify you need not worry about finding materials and try to control level of your skills because our teachers do this for you.
-							</div>
-						</div>
-						<div style="clear: both;"></div>
-						<div class="main-description">
-							<div class="main-description-icon" id="icon3">
-								<img src="/img/system/heart.png" />
-							</div>
-							<div class="main-description-text">
-								<b>Fascinating</b>
-								<br />
-								Learning new language with live teacher makes the process fascinating.
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="main-right">
-						<center><h4>Sign up for free</h4></center>
-						<form>
-							<br />
-							<input type="text" name="mainEmail" id="mainEmailInput" placeholder="Email..." class="form-control" required />
-							<input type="password" name="mainPassword" id="mainPasswordInput" placeholder="Password..." class="form-control" required />
-							<br />
-							<button type="button" class="btn btn-success main-sign-up-button">Sign up</button>
-							<br /><br />
-							<p class="text-center"><b><a href="" data-toggle="modal" data-target="#sign-in" style="font-size: 12px;">Already have an account?</a></b></p>
-						</form>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
+		<div style="clear: both;"></div>
 	</section>
-	<br />
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="text-center text-header">
-					<h2>Save your time</h2>
-					<br />
-					<div class="col-md-3"></div>
-					<div class="col-md-6">
-						<div class="computer-icon">
-							<img src="/img/system/computer.png" />
-						</div>
-						<div class="computer-text text-left text" style="margin-top: 0;">
-							<b><i class="fa fa-check" aria-hidden="true"></i> Study everywhere</b>
-							<br />
-							You can learn Russian at any place, where you can find Wi-Fi.
-						</div>
-						<div class="computer-text text-left text">
-							<b><i class="fa fa-check" aria-hidden="true"></i> Any time</b>
-							<br />
-							Our teachers are ready to meet you when ever you want.
-						</div>
-						<div class="computer-text text-left text">
-							<b><i class="fa fa-check" aria-hidden="true"></i> Native speakers</b>
-							<br />
-							You get an opportunity to study with native speakers.
-						</div>
-					</div>
-					<div class="col-md-3"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container-fluid index-grey-container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="text-center text-header">
-					<h2>Money back guarantee</h2>
-					<br />
-					<div class="col-md-3"></div>
-					<div class="col-md-6">
-						<div class="guarantee-icon text-center">
-							<img src="/img/system/check.png" />
-						</div>
-						<div class="guarantee-text text-center text" style="margin-top: 0;">
-							Do not worry for your money. If your lesson were awful or your teacher did not study with you at the designated time, you will get your money back within 24 hours from the moment of application.
-						</div>
-					</div>
-					<div class="col-md-3"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container-fluid index-container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="text-center text-header">
-					<h2>Student feedback</h2>
-					<h4>We are receiving a large number of reviews on our work. Here are some of them.</h4>
-					<br />
-					<div class="col-md-4">
-						<div class="feedback-container">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At blanditiis deleniti doloribus fugiat, minima natus quod. Ad beatae fugiat illum maxime minima molestiae necessitatibus quam reprehenderit, sed. Error, reprehenderit, suscipit!
-						</div>
-						<div class="feedback-img">
-							<img src="/img/system/say.png" />
-						</div>
-						<div class="feedback-photo text-center">
-							<img src="/img/system/photo1.png" />
-						</div>
-						<div class="text-center">
-							<b>Mike C.</b>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="feedback-container">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At blanditiis deleniti doloribus fugiat, minima natus quod. Ad beatae fugiat illum maxime minima molestiae necessitatibus quam reprehenderit, sed. Error, reprehenderit, suscipit!
-						</div>
-						<div class="feedback-img">
-							<img src="/img/system/say.png" />
-						</div>
-						<div class="feedback-photo text-center">
-							<img src="/img/system/photo2.png" />
-						</div>
-						<div class="text-center">
-							<b>Antonio V.</b>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="feedback-container">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. At blanditiis deleniti doloribus fugiat, minima natus quod. Ad beatae fugiat illum maxime minima molestiae necessitatibus quam reprehenderit, sed. Error, reprehenderit, suscipit!
-						</div>
-						<div class="feedback-img">
-							<img src="/img/system/say.png" />
-						</div>
-						<div class="feedback-photo text-center">
-							<img src="/img/system/photo3.png" />
-						</div>
-						<div class="text-center">
-							<b>Judith R.</b>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="modal fade" id="sign-in" role="dialog">
 		<div class="modal-dialog modal-sm">

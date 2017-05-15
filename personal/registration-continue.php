@@ -247,7 +247,7 @@
 
 	<div style="clear: both;"></div>
 
-	<footer>
+	<footer id="footer-top">
 		<div class="row">
 			<div class="container">
 				<div class="col-md-4 footer-section">
@@ -290,7 +290,7 @@
 					<br /><br />
 					<img src="/img/flags/flat/16/US.png" /> <span class="font-16">USA</span>
 					<br />
-					167 Corey Rd., Suite 206, Brighton, MA 02135
+					<?= COMPANY_ADDRESS ?>
 				</div>
 				<div class="col-md-4 footer-section">
 					<span class="font-16">Rusify social</span>
@@ -307,7 +307,7 @@
 		</div>
 	</footer>
 
-	<footer style="background-color: #32393f;">
+	<footer style="background-color: #32393f;" id="footer-bottom">
 		<div class="row">
 			<div class="container">
 				<div class="col-md-4 footer-section">&copy; <?php if(date('Y') > 2017) {echo "2017 - ".date('Y');} else {
@@ -321,4 +321,5 @@
 	</footer>
 
 </body>
+
 </html>

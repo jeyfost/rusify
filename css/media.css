@@ -33,6 +33,10 @@
         margin-top: 30px;
         text-align: center;
     }
+
+    .btn-password-recovery {
+        margin-top: 20px;
+    }
 }
 
 /* Small Devices, Tablets */
