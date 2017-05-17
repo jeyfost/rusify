@@ -246,11 +246,11 @@ if(empty($_REQUEST['hash'])) {
 				<div class="col-md-4 footer-section">
 					<span class="font-16">About us</span>
 					<br /><br />
-					<a href="">Help</a>
+					<a href="/documents/help.php">Help</a>
 					<br />
-					<a href="">How it works</a>
+					<a href="documents/how-it-works.php">How it works</a>
 					<br />
-					<a href="">Who are we</a>
+					<a href="documents/about.php">Who are we</a>
 				</div>
 				<div class="col-md-4 footer-section">
 					<span class="font-16">For students</span>
@@ -262,11 +262,11 @@ if(empty($_REQUEST['hash'])) {
 				<div class="col-md-4 footer-section">
 					<span class="font-16">For teachers</span>
 					<br /><br />
-					<a href="">Work principles</a>
+					<a href="documents/principles.php">Work principles</a>
 					<br />
 					<a href="">Find students</a>
 					<br />
-					<a href="">FAQ</a>
+					<a href="documents/faq.php">FAQ</a>
 				</div>
 			</div>
 			<div class="container" style="border-bottom: 1px dotted #717a82; height: 1px; margin: 30px auto;"></div>
@@ -306,7 +306,7 @@ if(empty($_REQUEST['hash'])) {
 				<div class="col-md-4 footer-section">&copy; <?php if(date('Y') > 2017) {echo "2017 - ".date('Y');} else {
 					echo "2017";} ?> Rusify Inc.</div>
 				<div class="col-md-4 footer-section">
-					<a href="">Terms of service</a> - <a href="">Privacy Policy</a> - <a href="">Refund Policy</a>
+					<a href="/documents/terms-of-service.php">Terms of service</a> - <a href="/documents/privacy-policy.php">Privacy Policy</a> - <a href="/documents/refund-policy.php">Refund Policy</a>
 				</div>
 				<div class="col-md-4 footer-section"></div>
 			</div>
